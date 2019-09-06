@@ -55,3 +55,21 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+-- Junction table
+CREATE TABLE "movie_genres" (
+	"id" serial primary key,
+	"movies_id" INT REFERENCES "movies",
+	"genres_id" INT REFERENCES "genres"
+
+);
+
+--testing query
+SELECT * FROM "movies"
+ORDER BY "title";
+
+SELECT * FROM "movies"
+JOIN "movie_genres" ON "movies".id = "movie_genres".movies_id
+JOIN "genres" ON "movie_genres".genres_id = "genres".id
+ORDER BY "movies".title ASC;
+
