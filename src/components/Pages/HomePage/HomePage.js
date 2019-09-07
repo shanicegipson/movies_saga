@@ -1,11 +1,10 @@
-import React, { component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
 
 import MovieList from '../../MovieList/MovieList';
 import mapStoreToProps from '../../../modules/mapStoreToProps';
 
-class HomePage extends component {
+class HomePage extends Component {
     render () {
         return (
             <div>

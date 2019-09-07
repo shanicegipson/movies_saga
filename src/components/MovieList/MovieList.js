@@ -1,31 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-import MovieCard from '../MovieCard/MovieCard';
+
 import mapStoreToProps from '../../modules/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
+
 
 class MovieList extends Component {
 
     componentDidMount() {
-        this.props.dispatch({type: 'GET_MOVIES'})
+        this.props.dispatch({ type: 'GET_MOVIES' })
     }
+
+    toDetailsPage = () => {
+        console.log('Movie title', this.props.store.moviesList);
+        this.props.history.push("/details/");
+    }
+    
+    
 
     render() {
+
+        const newMovieArray = this.props.store.moviesList.map((movie, index) => {
+            return (
+                <div key={index}>
+                    <h3> {movie.title}</h3>
+                    <p> {movie.description}</p> 
+                    <img  src={movie.poster} onClick={this.toDetailsPage} alt='text'/>
+                </div>
+            )
+        });
+
         return (
-            <div>
-                <Grid container spacing={3}>
-                    {this.props.store.moviesList.map((movie, index) => {
-                        {console.log('meow',movie.name)}
-                        return (
-                            <Grid key={index} item>
-                                <MovieCard movie={movie}></MovieCard>
-                            </Grid>
-                        )
-                    })}
-                </Grid>
+            <div className="App">
+                
+                <ul>
+                    {newMovieArray}
+                </ul>
             </div>
         );
+
     }
+
 }
 
-export default connect (mapStoreToProps) (MovieList);
+
+
+    export default connect(mapStoreToProps)(withRouter(MovieList));
