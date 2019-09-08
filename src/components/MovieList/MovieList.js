@@ -11,7 +11,6 @@ class MovieList extends Component {
     }
 
     toDetailsPage = (movies_id) => (event) => {
-        console.log(movies_id)
         this.props.history.push("/details/"+movies_id);
     }
 
