@@ -7,14 +7,18 @@ import { withRouter } from 'react-router-dom';
 class EditButton extends Component {
 
 toEditPage = (event) => {
-    this.props.history.push("/edit");
+    this.props.history.push("/edit/"+this.props.match.params.id);
 }
 
     render() {
+
         return (
             <div>
-                <button onClick={this.toEditPage}>Edit</button>
+                <div>
+                    <button onClick={this.toEditPage}>Edit</button>
+                </div>
             </div>
+            
         )
     }
 }

@@ -27,4 +27,24 @@ router.get('/details/:id', (req, res) => {
       });
   });
 
+  router.post('/', (req, res) => {
+    const newMovieInfo = req.body;
+    const queryText = `INSERT INTO movies ("title", "description")
+                      VALUES ($1, $2)`;
+    const queryValues = [
+      newMovieInfo.title,
+      newMovieInfo.description,
+    ];
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => {
+        console.log('Error completing SELECT plant query', err);
+        res.sendStatus(500);
+      });
+  });
+  
+ 
+
+
+
  module.exports = router;
