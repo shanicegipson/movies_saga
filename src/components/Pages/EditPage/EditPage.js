@@ -7,6 +7,10 @@ class EditPage extends Component {
     cancelEdit = (event) => {
         this.props.history.push('/details');
     }
+
+    editInfo() {
+        console.log('Edit Button');
+    }
     render() {
         return (
             <div>
