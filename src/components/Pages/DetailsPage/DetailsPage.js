@@ -12,7 +12,9 @@ function MovieDetails(props) {
     console.log(movieInfo, 'THIS IS A MOVIE!');
     console.log(props.store.moviesList, 'What do we have?');
     console.log(movie.movies_id, 'movie ID');
-        return movie.movies_id === props.match.params.id
+    console.log(props.match.params.id, 'clicked id');
+
+        return movie.movies_id == props.match.params.id
         
 
     })
