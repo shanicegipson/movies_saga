@@ -27,24 +27,30 @@ router.get('/details/:id', (req, res) => {
       });
   });
 
-  router.post('/', (req, res) => {
-    const newMovieInfo = req.body;
-    const queryText = `INSERT INTO movies ("title", "description")
-                      VALUES ($1, $2)`;
+  router.put('/movie/:id', (req, res) => {
+    const updatedMovie = req.body;
+    const movieId = req.params.id
+    console.log(movieId, 'MOVIE ID');
+    console.log(updatedMovie, 'MOVIE information');
+  
+    const queryText = `UPDATE "movies"
+    SET "title" = $1, 
+    "description" = $2
+    WHERE "id"=$3;`;
+  
     const queryValues = [
-      newMovieInfo.title,
-      newMovieInfo.description,
+      updatedMovie.title,
+      updatedMovie.description,
+      movieId
     ];
+  
     pool.query(queryText, queryValues)
-      .then(() => { res.sendStatus(201); })
+      .then(() => { res.sendStatus(200); })
       .catch((err) => {
-        console.log('Error completing SELECT plant query', err);
+        console.log('Error Updating movie info', err);
         res.sendStatus(500);
       });
   });
   
  
-
-
-
  module.exports = router;

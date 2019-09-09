@@ -11,7 +11,7 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 app.use('/movies', moviesRouter);
-console.log(moviesRouter);
+
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

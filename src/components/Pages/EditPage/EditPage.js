@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../../modules/mapStoreToProps';
 
+import {withRouter} from 'react-router-dom';
+
+
 class EditPage extends Component {
     state = {
         newInfo: {
@@ -24,23 +27,25 @@ class EditPage extends Component {
             }
         });
     }
+    
 
     updateMovie = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: 'POST_MOVIE', payload: this.state.newInfo });
-        console.log(this.state.newInfo);
+        console.log('clicked update id ', this.props.movies.id);
+        this.props.dispatch({ type: 'UPDATE_MOVIE', payload: this.state.newInfo });
+        console.log(this.state.newInfo, 'Updated info');
     }
 
 
     render() {
         const movieInfo =this.props.store.moviesList.filter((movie, index) => {        
-            console.log(this.props.match.params.id, 'movie ID that was clicked');
-            console.log(movie.movies_id, 'movie ID');
-            console.log(movie, 'movie that was clicked');
-            console.log(movie[0].title, 'title of movie clicked');
+            // console.log(this.props.match.params.id, 'movie ID that was clicked');
+            // console.log(movie.movies_id, 'movie ID');
+            // console.log(movie, 'movie that was clicked');
+            // console.log(movie[0].title, 'title of movie clicked');
+        //    console.log(movieInfo, 'movie info');
 
             return movie.movies_id == this.props.match.params.id
-            
         
         })
         
@@ -57,9 +62,10 @@ class EditPage extends Component {
                     </form>
                 </div>
                 <div>
-                    <h3>{movieInfo[0].title}</h3>
-                    <p>{movieInfo[0].description}</p>
-                    <p>{movieInfo[0].name}</p>
+                    <h3>Id: {this.props.match.params.id}</h3>
+                    <h3>{movieInfo.title}</h3>
+                    {/* <p>{movieInfo[0].description}</p>
+                    <p>{movieInfo[0].name}</p> */}
                 </div>
                 
                 
@@ -68,4 +74,4 @@ class EditPage extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(EditPage);
+export default connect(mapStoreToProps)(withRouter(EditPage));
