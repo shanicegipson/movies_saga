@@ -34,6 +34,7 @@ function* getMovies() {
 function* putMovies(action) {
     try {
         yield axios.put('/movies/movie/'+action.payload);
+        console.log(action.payload.id, 'Action payload id'); 
         yield put ({type: 'GET_MOVIES'});
     }
     catch(err) {
